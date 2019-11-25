@@ -4,7 +4,7 @@ class Database
 
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "";
+    private $db_name = "methodeagile";
     private $username = "root";
     private $password = "";
     public $conn;
