@@ -25,6 +25,7 @@ if (isset($_POST['submit']) and !empty($_POST['pseudo']) and !empty($_POST['pass
     } else {
         session_start();
         $_SESSION['pseudo'] = $user->pseudo;
+        $_SESSION['id_user'] = $user->id;
         header('Location: ../canaux-chat.php');
         // echo 'logged';
     }

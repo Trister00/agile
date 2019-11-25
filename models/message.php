@@ -30,9 +30,13 @@ class Message
 
     public function readAll()
     {
-        $query = 'SELECT * FROM ' . $this->table_name . '';
+        $query = 'SELECT * FROM ' . $this->table_name . ' WHERE id_canal=:id_canal';
         $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(':id_canal', $this->id_canal);
         $stmt->execute();
+
+
 
         return $stmt->fetchAll();
     }

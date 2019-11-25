@@ -34,7 +34,7 @@ class User
 
     public function read()
     {
-        $sql = 'SELECT pseudo,password FROM ' . $this->table_name . ' WHERE pseudo=:pseudo';
+        $sql = 'SELECT id_user,pseudo,password FROM ' . $this->table_name . ' WHERE pseudo=:pseudo';
         $stmt = $this->conn->prepare($sql);
 
         $stmt->bindParam(':pseudo', $this->pseudo);
@@ -48,6 +48,7 @@ class User
             // echo '<br/>';
             // echo $this->password;
             if (password_verify($this->password, $tmp['password'])) {
+                $this->id = $tmp['id_user'];
                 return true;
             } else {
                 return false;

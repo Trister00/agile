@@ -1,5 +1,53 @@
+<?php
+
+include_once '../config/database.php';
+include_once '../models/message.php';
+$page_title = 'chat';
+
+echo $_SESSION['pseudo'];
+echo $_SESSION['id_user'];
+echo "<br/>";
+
+?>
+
+<?php
+$databse = new Database();
+$db = $databse->getConnection();
+$message = new Message($db);
+$message->id_canal = $_GET['id_canal'];
+$messages = $message->readAll();
+
+
+$id_canal = $_GET['id_canal'];
+// echo $id_canal;
+// print_r($messages);
+?>
 <div class="mesgs">
     <div class="msg_history">
+        <?php
+        foreach ($messages as $mess) {
+            if ($mess['id_user'] != $_SESSION['id_user']) {
+                echo  "<div class=\"incoming_msg\">
+                <div class=\"incoming_msg_img\"> <img src=\"https://ptetutorials.com/images/user-profile.png\" alt=\"sunil\">
+                </div>
+                <div class=\"received_msg\">
+                    <div class=\"received_withd_msg\">
+                        <p>" . $mess['contenu'] . "</p>
+                        <span class=\"time_date\"> 11:01 AM | June 9</span>
+                    </div>
+                </div>
+            </div>";
+            } else {
+                echo ' <div class="outgoing_msg">
+                <div class="sent_msg">
+                    <p>' . $mess['contenu'] . '</p>
+                    <span class="time_date"> 11:01 AM | June 9</span>
+                </div>
+            </div>';
+            }
+        }
+        echo 'fin boucle';
+        ?>
         <div class="incoming_msg">
             <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
             </div>
