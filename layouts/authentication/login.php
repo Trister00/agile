@@ -7,7 +7,7 @@ $page_title = 'Login';
 
 
 <?php
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) and !empty($_POST['pseudo']) and !empty($_POST['password'])) {
     // $pseudo = $_POST['pseudo'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     // session_start();
@@ -18,13 +18,13 @@ if (isset($_POST['submit'])) {
     $databse = new Database();
     $db = $databse->getConnection();
     $user = new User($db);
-    $user->username = $_POST['pseudo'];
+    $user->pseudo = $_POST['pseudo'];
     $user->password = $_POST['password'];
     if (!$user->read()) {
         echo 'wrong credits';
     } else {
         session_start();
-        $_SESSION['username'] = $user->username;
+        $_SESSION['pseudo'] = $user->pseudo;
         header('Location: ../canaux-chat.php');
         // echo 'logged';
     }

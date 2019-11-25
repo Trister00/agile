@@ -37,7 +37,7 @@ class User
         $sql = 'SELECT pseudo,password FROM ' . $this->table_name . ' WHERE pseudo=:pseudo';
         $stmt = $this->conn->prepare($sql);
 
-        $stmt->bindParam(':pseudo', $this->username);
+        $stmt->bindParam(':pseudo', $this->pseudo);
         $stmt->execute();
 
         $tmp = $stmt->fetch();
